@@ -7,6 +7,7 @@ import Home from "./Home";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
 import Register from "./Register";
+import ShowQuestion from "./ShowQuestion";
 
 export default function App() {
   return (
@@ -20,6 +21,8 @@ export default function App() {
 
         <Route element={<ProtectedLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/showquestion" element={<ShowQuestion />} />
+
         </Route>
       </Routes>
     </BrowserRouter>
