@@ -8,23 +8,30 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 
+import { RegisterFields } from "../types/fields";
+import authService from "../services/authService";
+
 const theme = createTheme();
 
 export default function Register() {
   const navigate = useNavigate();
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const form: RegisterFields = {
+      first_name: data.get("firstName") as string,
+      last_name: data.get("lastName") as string,
+      email: data.get("email") as string,
+      password: data.get("password") as string,
+      confirm_password: data.get("confirmPassword") as string,
+    };
+    console.log(form);
+    authService.register(form);
   };
 
   return (

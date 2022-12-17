@@ -13,18 +13,21 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 
 import ImageBG from "../assets/login-bg.jpg";
+import { LoginFields } from "../types/fields";
+import authService from "../services/authService";
 
 const theme = createTheme();
 
 export default function Login() {
   const navigate = useNavigate();
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const fields: LoginFields = {
+      email: data.get("email") as string,
+      password: data.get("password") as string,
+    };
+    const response = await authService.login(fields);
   };
 
   return (
