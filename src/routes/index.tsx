@@ -8,6 +8,8 @@ import Login from "./Login";
 import Dashboard from "./Dashboard";
 import Register from "./Register";
 import ShowQuestion from "./ShowQuestion";
+import TestCreate from "./TestCreate";
+import QuestionCreate from "./QuestionCreate";
 
 export default function App() {
   return (
@@ -22,7 +24,8 @@ export default function App() {
         <Route element={<ProtectedLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/showquestion" element={<ShowQuestion />} />
-
+          <Route path="/testcreate" element={<TestCreate />} />
+          <Route path="/questioncreate" element={<QuestionCreate />} />
         </Route>
       </Routes>
     </BrowserRouter>
