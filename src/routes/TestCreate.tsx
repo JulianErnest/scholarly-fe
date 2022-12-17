@@ -32,13 +32,14 @@ export default function TestCreate() {
 
         <Box style={{ background: '#f2f6fc' }}
         textAlign='center' sx={{
-        width: 800,
-        height: 400,
+        width: '50%',
+        height: '100%',
         boxShadow: 2,
         rowGap: 3,
+        my: 1,
         justifyContent: 'center'
       }}>
-        <Typography textAlign="center" variant="h4" color="#F1B461">
+        <Typography textAlign="center" variant="h4" color="#F1B461" sx={{ my: 4}}>
              Scholarly
          </Typography>
         <Typography color="#F1B461">
@@ -58,7 +59,7 @@ export default function TestCreate() {
                 <TextField id="standard-basic" label="Test Description  " variant="standard" />
             </Grid>
         </Grid>
-            <Button size="large" variant="contained" color="success">Create Test</Button>
+            <Button size="large" variant="contained" color="success" sx={{ my: 4, width: 200 }}>Create Test</Button>
         </Box>
 </Container>
     </ThemeProvider>
