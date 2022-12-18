@@ -43,7 +43,7 @@ export default function QuestionCreate() {
                     Scholarly
                 </Typography>
                 <Typography color="#F1B461">
-                    Create a test by filling up the following information below.
+                    Create a question by filling up the following information below.
                 </Typography>
 
                 <TextField label="Question" id="question" margin="normal" sx={{mx: 3, my: 4, width: 700}}/>

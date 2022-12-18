@@ -9,6 +9,7 @@ import Dashboard from "./Dashboard";
 import Register from "./Register";
 import TestCreate from "./TestCreate";
 import QuestionCreate from "./QuestionCreate";
+import TestView from "./TestView";
 
 export default function App() {
   return (
@@ -22,7 +23,8 @@ export default function App() {
 
         <Route element={<ProtectedLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/testcreate" element={<TestCreate />} />
+          <Route path="/testcreate" element={<TestCreate />} />\
+          <Route path="/testview" element={<TestView/>} />
           <Route path="/questioncreate" element={<QuestionCreate />} />
         </Route>
       </Routes>
