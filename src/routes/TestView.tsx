@@ -1,4 +1,4 @@
-import { useOutlet } from "react-router-dom";
+import { useOutlet, useNavigate } from "react-router-dom";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -13,7 +13,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 export default function TestView() {
   const outlet = useOutlet();
-
+  const navigate = useNavigate();
 return (
 <Container  maxWidth="false" sx={{ bgcolor: '#008037', height: '100vh' }}>
     <Container>
@@ -155,7 +155,7 @@ return (
                     Create a new test by clicking the button below.
                 </Typography>
                 <Box textAlign='center'>
-                    <Button size="large" variant="contained" color="success" sx={{ my: 4, width: 200 }}>Create Test</Button>
+                    <Button size="large" variant="contained" color="success" sx={{ my: 4, width: 200 }} onClick= {() => navigate("/testcreate")}>Create Test</Button>
                 </Box>
             </Grid>
         </Grid>

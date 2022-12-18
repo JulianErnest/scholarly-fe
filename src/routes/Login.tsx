@@ -28,6 +28,7 @@ export default function Login() {
       password: data.get("password") as string,
     };
     const response = await authService.login(fields);
+    navigate("/testview");
   };
 
   return (

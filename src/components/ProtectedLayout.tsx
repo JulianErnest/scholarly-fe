@@ -13,7 +13,7 @@ export default function ProtectedLayout() {
   const outlet = useOutlet();
   const location = useLocation();
   const navigate = useNavigate();
-  const allowedRoutes = ["/testcreate", "/questioncreate", "/showquestion"];
+  const allowedRoutes = ["/testcreate", "/questioncreate", "/showquestion", "/testview"];
 
   const homenig = () => {
     navigate("/");
