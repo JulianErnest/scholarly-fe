@@ -1,4 +1,4 @@
-import { LoginFields, RegisterFields } from "../types/fields";
+import { LoginFields, RegisterFields, TestFields, QuestionFields } from "../types/fields";
 import api, { DefaultResponse } from "./api";
 
 async function login(fields: LoginFields) {
