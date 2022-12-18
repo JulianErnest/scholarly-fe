@@ -8,16 +8,31 @@ import { AiFillLinkedin } from "react-icons/ai";
 import headstyles from "../css/header.module.css";
 import footerstyles from "../css/footer.module.css";
 import logo from "../css/logo.png";
+import { UserContext } from "../context/UserContext";
+import { useContext, useEffect } from "react";
+import { UserContextType } from "../context/User";
 
 export default function ProtectedLayout() {
   const outlet = useOutlet();
   const location = useLocation();
   const navigate = useNavigate();
-  const allowedRoutes = ["/testcreate", "/questioncreate", "/showquestion"];
+  const allowedRoutes = [
+    "/testcreate",
+    "/questioncreate",
+    "/showquestion",
+    "/testview",
+  ];
+  const { user } = useContext(UserContext) as UserContextType;
 
   const homenig = () => {
     navigate("/");
   };
+
+  // useEffect(() => {
+  //   if (user.id == 0) {
+  //     navigate("/");
+  //   }
+  // }, []);
 
   return (
     <div>

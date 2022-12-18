@@ -23,9 +23,8 @@ export default function App() {
         </Route>
 
         <Route element={<ProtectedLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/testcreate" element={<TestCreate />} />\
-          <Route path="/testview" element={<TestView/>} />
+          <Route path="/testview" element={<TestView />} />
           <Route path="/showquestion" element={<ShowQuestion />} />
           <Route path="/testcreate" element={<TestCreate />} />
           <Route path="/questioncreate" element={<QuestionCreate />} />
