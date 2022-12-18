@@ -21,6 +21,7 @@ export default function ProtectedLayout() {
     "/questioncreate",
     "/showquestion",
     "/testview",
+    "/admin",
   ];
   const { user } = useContext(UserContext) as UserContextType;
 
