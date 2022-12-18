@@ -13,6 +13,7 @@ export default function ProtectedLayout() {
   const outlet = useOutlet();
   const location = useLocation();
   const navigate = useNavigate();
+  const allowedRoutes = ["/testcreate", "/questioncreate", "/showquestion"];
 
   const homenig = () => {
     navigate("/");
@@ -20,7 +21,7 @@ export default function ProtectedLayout() {
   
   return (
     <div>
-      {location.pathname === "/" ? (
+      {allowedRoutes.includes(location.pathname.toLowerCase()) && (
         <div>
           <div className={headstyles.header}>
             <div className={headstyles.logopic} onClick={homenig}>
@@ -45,8 +46,8 @@ export default function ProtectedLayout() {
             </a>
           </div>
         </div>
-      ) : (
-        <>{outlet}</>
+      
+        
       )}
     </div>
   );
