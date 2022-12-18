@@ -7,6 +7,10 @@ import Home from "./Home";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
 import Register from "./Register";
+import ShowQuestion from "./ShowQuestion";
+import TestCreate from "./TestCreate";
+import QuestionCreate from "./QuestionCreate";
+import TestView from "./TestView";
 
 export default function App() {
   return (
@@ -20,6 +24,11 @@ export default function App() {
 
         <Route element={<ProtectedLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/testcreate" element={<TestCreate />} />\
+          <Route path="/testview" element={<TestView/>} />
+          <Route path="/showquestion" element={<ShowQuestion />} />
+          <Route path="/testcreate" element={<TestCreate />} />
+          <Route path="/questioncreate" element={<QuestionCreate />} />
         </Route>
       </Routes>
     </BrowserRouter>
