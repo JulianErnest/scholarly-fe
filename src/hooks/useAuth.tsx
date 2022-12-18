@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }: any) => {
   const [user, setUser] = useLocalStorage("user", null);
   const navigate = useNavigate();
 
-  const login = async (data) => {
+  const login = async (data: any) => {
     setUser(data);
     navigate("/dashboard/profile", { replace: true });
   };

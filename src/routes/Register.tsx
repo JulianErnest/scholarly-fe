@@ -1,10 +1,7 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -15,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 import { RegisterFields } from "../types/fields";
 import authService from "../services/authService";
+import toastService from "../services/toastService";
 
 const theme = createTheme();
 
@@ -30,8 +28,9 @@ export default function Register() {
       password: data.get("password") as string,
       confirm_password: data.get("confirmPassword") as string,
     };
-    console.log(form);
-    authService.register(form);
+    navigate("/login");
+    const response = await authService.register(form);
+    toastService.showToast(response);
   };
 
   return (
@@ -108,19 +107,11 @@ export default function Register() {
                 <TextField
                   required
                   fullWidth
-                  name="password"
+                  name="confirmPassword"
                   label="Confirm Password"
                   type="password"
-                  id="password"
+                  id="confirmPassword"
                   autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
             </Grid>
