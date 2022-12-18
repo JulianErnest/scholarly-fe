@@ -15,11 +15,18 @@ import { useNavigate } from "react-router-dom";
 import ImageBG from "../assets/login-bg.jpg";
 import { LoginFields } from "../types/fields";
 import authService from "../services/authService";
+import toastService from "../services/toastService";
+import { useContext } from "react";
+import { UserContextType } from "../context/User";
+import { UserContext } from "../context/UserContext";
 
 const theme = createTheme();
 
 export default function Login() {
   const navigate = useNavigate();
+  const { setUser, user, setToken } = useContext(
+    UserContext
+  ) as UserContextType;
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -28,8 +35,13 @@ export default function Login() {
       password: data.get("password") as string,
     };
     const response = await authService.login(fields);
-    navigate("/testview");
+    if (response.success) {
+      setUser(response.data.user);
+      setToken(response.data.token);
+    }
+    toastService.showToast(response);
   };
+  console.log(user);
 
   return (
     <ThemeProvider theme={theme}>
@@ -99,10 +111,6 @@ export default function Login() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
               />
               <Button
                 type="submit"

@@ -8,15 +8,28 @@ import { AiFillLinkedin } from "react-icons/ai";
 import headstyles from "../css/header.module.css";
 import footerstyles from "../css/footer.module.css";
 import logo from "../css/logo.png";
+import { useAuth } from "../hooks/useAuth";
+import { useContext, useEffect } from "react";
+import { UserContextType } from "../context/User";
+import { UserContext } from "../context/UserContext";
 
 export default function HomeLayout() {
   const outlet = useOutlet();
   const location = useLocation();
   const navigate = useNavigate();
+  const { user } = useContext(UserContext) as UserContextType;
 
   const homenig = () => {
     navigate("/");
   };
+
+  console.log(user);
+
+  useEffect(() => {
+    if (user.id != 0) {
+      navigate("/testcreate");
+    }
+  }, [user]);
 
   return (
     <div>
@@ -37,7 +50,7 @@ export default function HomeLayout() {
           </div>
           {outlet}
           <div className={footerstyles.footer}>
-          <p className={footerstyles.footerp1}>
+            <p className={footerstyles.footerp1}>
               Scholarly<br></br>© Copyright 2022
             </p>
             <a href="http://linkedin.com" className={footerstyles.fb}>
