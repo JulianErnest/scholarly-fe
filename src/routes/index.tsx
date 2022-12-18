@@ -26,7 +26,7 @@ export default function App() {
         <Route element={<ProtectedLayout />}>
           <Route path="/testcreate" element={<TestCreate />} />\
           <Route path="/testview" element={<TestView />} />
-          <Route path="/showquestion" element={<ShowQuestion />} />
+          <Route path="/showquestion/:id" element={<ShowQuestion />} />
           <Route path="/testcreate" element={<TestCreate />} />
           <Route path="/questioncreate" element={<QuestionCreate />} />
           <Route path="/admin" element={<Admin />} />

@@ -25,7 +25,6 @@ export default function TestCreate() {
   const { token, user } = useContext(UserContext) as UserContextType;
   useEffect(() => {
     (async () => {
-      console.log(token);
       const response = await subjectService.getAllSubjects(token);
       setSubjects(response.data);
     })();

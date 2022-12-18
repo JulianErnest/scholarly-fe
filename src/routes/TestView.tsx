@@ -14,14 +14,19 @@ import { Test } from "../types/Test";
 import testService from "../services/testService";
 import { UserContextType } from "../context/User";
 import { UserContext } from "../context/UserContext";
+import { Subject } from "../types/Subject";
+import subjectService from "../services/subjectService";
 
 export default function TestView() {
   const [tests, setTests] = useState<Test[]>([]);
+  const [subjects, setSubjects] = useState<Subject[]>([]);
   const navigate = useNavigate();
   const { token, user } = useContext(UserContext) as UserContextType;
   useEffect(() => {
     (async () => {
       const response = await testService.getTestsUser(token, user.id);
+      const responseSubject = await subjectService.getAllSubjects(token);
+      setSubjects(responseSubject.data);
       if (response.success) {
         setTests(response?.data);
       }
@@ -33,8 +38,10 @@ export default function TestView() {
       <Container>
         <Grid container spacing={2}>
           <Grid item xs={4}>
-            {tests.map((test) => (
+            {tests.map((test, key) => (
               <List
+                key={key}
+                onClick={() => navigate("/showquestion/" + test.id)}
                 sx={{
                   width: "100%",
                   maxWidth: 360,
@@ -46,7 +53,13 @@ export default function TestView() {
               >
                 {" "}
                 <ListItem>
-                  <ListItemText primary="Subject" secondary={test.subject_id} />
+                  <ListItemText
+                    primary="Subject"
+                    secondary={
+                      subjects.find((item) => item.id == test.subject_id)
+                        ?.subject_name
+                    }
+                  />
                 </ListItem>
                 <Divider variant="inset" component="li" />
                 <ListItem>
