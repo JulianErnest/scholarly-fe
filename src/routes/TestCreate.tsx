@@ -6,12 +6,45 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Container } from "@mui/material";
+import { Container, MenuItem, Select } from "@mui/material";
 import ImageBG from "../assets/login-bg.jpg";
+import { useContext, useEffect, useState } from "react";
+import subjectService from "../services/subjectService";
+import { UserContext } from "../context/UserContext";
+import { UserContextType } from "../context/User";
+import { Subject } from "../types/Subject";
+import testService from "../services/testService";
+import toastService from "../services/toastService";
 const theme = createTheme();
 
 export default function TestCreate() {
-  const outlet = useOutlet();
+  const [subjects, setSubjects] = useState<Subject[]>([]);
+  const [timeLimit, setTimeLimit] = useState("");
+  const [testDescription, setTestDescription] = useState("");
+  const [testName, setTestName] = useState("");
+  const [subject, handleSubject] = useState("");
+  const { token, user } = useContext(UserContext) as UserContextType;
+  useEffect(() => {
+    (async () => {
+      console.log(token);
+      const response = await subjectService.getAllSubjects(token);
+      setSubjects(response.data);
+    })();
+  }, []);
+
+  async function handleCreate() {
+    const response = await testService.createTest(
+      {
+        test_description: testDescription,
+        test_name: testName,
+        subject_id: subject,
+        time_limit: timeLimit,
+      },
+      user.id,
+      token
+    );
+    toastService.showToast(response);
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -60,15 +93,25 @@ export default function TestCreate() {
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           >
             <Grid item xs={6} sx={{ my: 4, width: 200 }}>
-              <TextField
-                required
-                id="subject"
-                label="Subject"
-                variant="standard"
-              />
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={subject}
+                label="Age"
+                sx={{ width: 200 }}
+                onChange={(e) => handleSubject(e.target.value)}
+              >
+                {subjects.map((item, key) => (
+                  <MenuItem value={item.id} key={key}>
+                    {item.subject_name}
+                  </MenuItem>
+                ))}
+              </Select>
             </Grid>
             <Grid item xs={6} sx={{ my: 4, width: 200 }}>
               <TextField
+                value={timeLimit}
+                onChange={(e) => setTimeLimit(e.target.value)}
                 required
                 id="time-limit"
                 label="Time Limit"
@@ -77,6 +120,8 @@ export default function TestCreate() {
             </Grid>
             <Grid item xs={6} sx={{ my: 4, width: 200 }}>
               <TextField
+                value={testName}
+                onChange={(e) => setTestName(e.target.value)}
                 required
                 id="test-name"
                 label="Test Name"
@@ -85,6 +130,9 @@ export default function TestCreate() {
             </Grid>
             <Grid item xs={6} sx={{ my: 4, width: 200 }}>
               <TextField
+                value={testDescription}
+                onChange={(e) => setTestDescription(e.target.value)}
+                required
                 id="test-description"
                 label="Test Description  "
                 variant="standard"
@@ -95,6 +143,7 @@ export default function TestCreate() {
             size="large"
             variant="contained"
             color="success"
+            onClick={handleCreate}
             sx={{ my: 4, width: 200 }}
           >
             Create Test

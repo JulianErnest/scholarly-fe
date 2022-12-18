@@ -12,8 +12,8 @@ export type RegisterFields = {
 };
 
 export type TestFields = {
-  test_subject: string;
-  test_timelim: number;
+  subject_id: string;
+  time_limit: string;
   test_name: string;
   test_description: string;
 };

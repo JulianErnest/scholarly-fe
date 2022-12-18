@@ -25,11 +25,11 @@ export default function HomeLayout() {
 
   console.log(user);
 
-  // useEffect(() => {
-  //   if (user.id != 0) {
-  //     navigate("/testview");
-  //   }
-  // }, [user]);
+  useEffect(() => {
+    if (user.id != 0) {
+      navigate("/testcreate");
+    }
+  }, [user]);
 
   return (
     <div>

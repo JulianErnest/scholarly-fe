@@ -28,11 +28,15 @@ export default function ProtectedLayout() {
     navigate("/");
   };
 
-  // useEffect(() => {
-  //   if (user.id == 0) {
-  //     navigate("/");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (user.id == 0) {
+      navigate("/");
+    }
+  }, []);
+
+  function handleClick(destination: string) {
+    navigate(destination);
+  }
 
   return (
     <div>
@@ -42,6 +46,13 @@ export default function ProtectedLayout() {
             <div className={headstyles.logopic} onClick={homenig}>
               <img src={logo}></img>Scholarly
             </div>
+            <p
+              onClick={() => handleClick("testview")}
+              style={{ marginRight: 20 }}
+            >
+              View Tests
+            </p>
+            <p onClick={() => handleClick("testcreate")}>Create Test</p>
             <div className={headstyles.headerright}></div>
           </div>
           {outlet}
