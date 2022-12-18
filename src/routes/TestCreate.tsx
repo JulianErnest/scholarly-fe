@@ -1,4 +1,4 @@
-import { useOutlet } from "react-router-dom";
+import { useOutlet, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
@@ -132,7 +132,7 @@ export default function TestCreate() {
                 onChange={(e) => setTestDescription(e.target.value)}
                 required
                 id="test-description"
-                label="Test Description  "
+                label="Test Description"
                 variant="standard"
               />
             </Grid>
