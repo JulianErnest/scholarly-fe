@@ -13,10 +13,8 @@ export default function Home() {
       <div className={Styles.bodycontainer}>
       <h1 className={Styles.header1}>Scholarly</h1>
       <p className={Styles.para1}>
-        MoneyManage is a financial management website that allows its users to
-        input their monthly budget, <br></br>
-        and their spendings to keep track of how much money they're spending on
-        a monthly basis.
+        Scholarly is a web-based system that allows its users to generate<br></br>
+       examination papers to be distrubuted to thei beneficiaries, most of which are educational institutions.
       </p>
 
       <button className={Styles.getStarted} onClick={getting}>
