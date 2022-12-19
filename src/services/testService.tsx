@@ -23,6 +23,23 @@ async function createTest(fields: TestFields, userId: number, token: string) {
   }
 }
 
+async function updateTest(fields: TestFields, userId: number, token: string) {
+  try {
+    const response = await api.put(
+      "test/" + userId,
+      { ...fields },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    return response.data;
+  } catch (error: any) {
+    return error.response.data;
+  }
+}
+
 async function getTests(token: string) {
   try {
     const response = await api.get("test", {
@@ -64,6 +81,7 @@ async function getTestsById(token: string, id: number) {
 
 export default {
   createTest,
+  updateTest,
   getTests,
   getTestsUser,
   getTestsById

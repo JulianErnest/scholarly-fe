@@ -3,8 +3,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Field from "./Field";
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, Grid, MenuItem, Select, TextField } from "@mui/material";
 import { Test } from "../types/Test";
 import testService from "../services/testService";
 import { UserContextType } from "../context/User";
@@ -12,11 +11,17 @@ import { UserContext } from "../context/UserContext";
 import itemService from "../services/itemService";
 import { Item } from "../types/Item";
 import toastService from "../services/toastService";
-const theme = createTheme();
+import { Subject } from "../types/Subject";
+import subjectService from "../services/subjectService";
 
 export default function ShowQuestion() {
   const [test, setTest] = useState<Test | null>(null);
+  const [subjects, setSubjects] = useState<Subject[]>([]);
   const [questions, setQuestions] = useState<Item[]>([]);
+  const [testName, setTestName] = useState("");
+  const [testDescription, setTestDescription] = useState("");
+  const [timeLimit, setTimeLimit] = useState("");
+  const [subject, handleSubject] = useState("");
   const { token, user } = React.useContext(UserContext) as UserContextType;
   const params = useParams();
   const navigate = useNavigate();
@@ -31,10 +36,21 @@ export default function ShowQuestion() {
         params.id as unknown as number,
         token
       );
+      const subject_response = await subjectService.getAllSubjects(token);
+      setSubjects(subject_response.data);
       setQuestions(questions_response.data);
       setTest(response.data[0]);
     })();
   }, []);
+
+  useEffect(() => {
+    setTestName(test?.test_name as string);
+    setTestDescription(test?.test_description as string);
+    setTimeLimit(test?.time_limit as any);
+    handleSubject(
+      subjects.find((s) => s.id === test?.subject_id)?.id as any
+    );
+  }, [test, subjects]);
 
   async function handleDelete(item: Item) {
     const response = await itemService.deleteItem(item.id, token);
@@ -46,6 +62,21 @@ export default function ShowQuestion() {
       );
       setQuestions(questions_response.data);
     }
+  }
+
+  async function handleUpdate() {
+    const response = await testService.updateTest(
+      {
+        test_description: testDescription,
+        test_name: testName,
+        subject_id: subject,
+        time_limit: timeLimit.toString(),
+      },
+      user.id,
+      token
+    );
+    setTest(response.data);
+    toastService.showToast(response);
   }
 
   return (
@@ -87,38 +118,73 @@ export default function ShowQuestion() {
       <Grid item xs={3}>
         <Box
           sx={{
-            width: "100%",
             height: "90%",
             backgroundColor: "gold",
+            display: "flex",
+            flexDirection: "column",
+            paddingLeft: 3,
+            paddingRight: 3,
           }}
         >
-          <Typography variant="h4" textAlign="center" paddingTop={10}>
+          <Typography variant="h5" textAlign="center" paddingTop={3}>
             Test Details
           </Typography>
-          <Typography variant="h6" textAlign="left" paddingTop={5}>
+
+          <Typography variant="h6" textAlign="left" paddingTop={3}>
             Test Name
           </Typography>
-          <Typography variant="h6" textAlign="left" paddingLeft={2}>
-            {test?.test_name}
-          </Typography>
-          <Typography variant="h6" textAlign="left" paddingTop={5}>
+          <TextField
+            value={testName}
+            onChange={(t) => setTestName(t.target.value)}
+          />
+
+          <Typography variant="h6" textAlign="left" paddingTop={3}>
             Test Description
           </Typography>
-          <Typography variant="h6" textAlign="left" paddingLeft={2}>
-            {test?.test_description}
-          </Typography>
-          <Typography variant="h6" textAlign="left" paddingTop={5}>
+          <TextField
+            value={testDescription}
+            onChange={(t) => setTestDescription(t.target.value)}
+          />
+
+          <Typography variant="h6" textAlign="left" paddingTop={3}>
             Time Limit
           </Typography>
-          <Typography variant="h6" textAlign="left" paddingLeft={2}>
-            {test?.time_limit}
-          </Typography>
-          <Typography variant="h6" textAlign="left" paddingTop={5}>
+          <TextField
+            value={timeLimit}
+            onChange={(t) => setTimeLimit(t.target.value)}
+          />
+
+          <Typography variant="h6" textAlign="left" paddingTop={3}>
             Number of Questions
           </Typography>
           <Typography variant="h6" textAlign="left" paddingLeft={2}>
             {questions.length}
           </Typography>
+
+          <Typography variant="h6" textAlign="left" paddingTop={3}>
+            Subject
+          </Typography>
+          <Select
+            style={{ marginTop: 20 }}
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={subject}
+            label="Age"
+            onChange={(e) => handleSubject(e.target.value)}
+          >
+            {subjects.map((item, key) => (
+              <MenuItem value={item.id} key={key}>
+                {item.subject_name}
+              </MenuItem>
+            ))}
+          </Select>
+
+          <Button
+            onClick={handleUpdate}
+            style={{ backgroundColor: "green", color: "white", marginTop: 50 }}
+          >
+            Update Test
+          </Button>
         </Box>
         <Box></Box>
       </Grid>
