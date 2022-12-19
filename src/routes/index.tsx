@@ -12,6 +12,7 @@ import TestCreate from "./TestCreate";
 import QuestionCreate from "./QuestionCreate";
 import TestView from "./TestView";
 import Admin from "./Admin";
+import Items from "./Items";
 
 export default function App() {
   return (
@@ -24,12 +25,15 @@ export default function App() {
         </Route>
 
         <Route element={<ProtectedLayout />}>
-          <Route path="/testcreate" element={<TestCreate />} />\
+          <Route path="/testcreate" element={<TestCreate />} />
           <Route path="/testview" element={<TestView />} />
           <Route path="/showquestion/:id" element={<ShowQuestion />} />
           <Route path="/testcreate" element={<TestCreate />} />
           <Route path="/questioncreate/:id" element={<QuestionCreate />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/tests" element={<QuestionCreate />} />
+          <Route path="/items" element={<Items />} />
+          <Route path="/subjects" element={<QuestionCreate />} />
         </Route>
       </Routes>
     </BrowserRouter>

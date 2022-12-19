@@ -27,6 +27,7 @@ export default function Register() {
       email: data.get("email") as string,
       password: data.get("password") as string,
       confirm_password: data.get("confirmPassword") as string,
+      user_type: 'CREATOR',
     };
     navigate("/login");
     const response = await authService.register(form);

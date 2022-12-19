@@ -44,8 +44,22 @@ async function deleteItem(id: number, token: string) {
   }
 }
 
+async function getAllItems(token: string) {
+  try {
+    const response = await api.get("item", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return response.data;
+  } catch (error: any) {
+    return error.response.data;
+  }
+}
+
 export default {
   createItem,
   getTestItems,
-  deleteItem
+  deleteItem,
+  getAllItems
 };
