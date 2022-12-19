@@ -20,8 +20,10 @@ export type TestFields = {
 
 export type QuestionFields = {
   question: string;
+  answer: string;
   choice_a: string;
   choice_b: string;
   choice_c: string;
   choice_d: string;
+  test_id: number;
 };

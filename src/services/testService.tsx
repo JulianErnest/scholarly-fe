@@ -49,8 +49,22 @@ async function getTestsUser(token: string, id: number) {
   }
 }
 
+async function getTestsById(token: string, id: number) {
+  try {
+    const response = await api.get("test/byId/" + id, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return response.data;
+  } catch (error: any) {
+    console.log(error.response.data);
+  }
+}
+
 export default {
   createTest,
   getTests,
   getTestsUser,
+  getTestsById
 };

@@ -36,9 +36,32 @@ export default function TestView() {
   return (
     <Container maxWidth="false" sx={{ bgcolor: "#008037", height: "100vh" }}>
       <Container>
+        <Paper elevation={3} />
+        <Typography
+          textAlign="center"
+          variant="h4"
+          color="#F1B461"
+          sx={{ my: 2 }}
+        >
+          Scholarly
+        </Typography>
+        <Typography color="#F1B461" textAlign="center">
+          Create a new test by clicking the button below.
+        </Typography>
+        <Box textAlign="center">
+          <Button
+            size="large"
+            variant="contained"
+            color="success"
+            onClick={() => navigate("/testcreate")}
+            sx={{ my: 4, width: 200 }}
+          >
+            Create Test
+          </Button>
+        </Box>
         <Grid container spacing={2}>
-          <Grid item xs={4}>
-            {tests.map((test, key) => (
+          {tests.map((test, key) => (
+            <Grid item xs={4}>
               <List
                 key={key}
                 onClick={() => navigate("/showquestion/" + test.id)}
@@ -76,33 +99,9 @@ export default function TestView() {
                   />
                 </ListItem>
               </List>
-            ))}
-          </Grid>
-          <Grid>
-            <Paper elevation={3} />
-            <Typography
-              textAlign="center"
-              variant="h4"
-              color="#F1B461"
-              sx={{ my: 2 }}
-            >
-              Scholarly
-            </Typography>
-            <Typography color="#F1B461">
-              Create a new test by clicking the button below.
-            </Typography>
-            <Box textAlign="center">
-              <Button
-                size="large"
-                variant="contained"
-                color="success"
-                onClick={() => navigate("/testcreate")}
-                sx={{ my: 4, width: 200 }}
-              >
-                Create Test
-              </Button>
-            </Box>
-          </Grid>
+            </Grid>
+          ))}
+          <Grid></Grid>
         </Grid>
       </Container>
     </Container>
