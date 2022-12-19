@@ -27,7 +27,7 @@ export default function HomeLayout() {
 
   useEffect(() => {
     if (user.id != 0) {
-      navigate("/testcreate");
+      navigate("/testview");
     }
   }, [user]);
 

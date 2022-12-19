@@ -14,14 +14,19 @@ import { Test } from "../types/Test";
 import testService from "../services/testService";
 import { UserContextType } from "../context/User";
 import { UserContext } from "../context/UserContext";
+import { Subject } from "../types/Subject";
+import subjectService from "../services/subjectService";
 
 export default function TestView() {
   const [tests, setTests] = useState<Test[]>([]);
+  const [subjects, setSubjects] = useState<Subject[]>([]);
   const navigate = useNavigate();
   const { token, user } = useContext(UserContext) as UserContextType;
   useEffect(() => {
     (async () => {
       const response = await testService.getTestsUser(token, user.id);
+      const responseSubject = await subjectService.getAllSubjects(token);
+      setSubjects(responseSubject.data);
       if (response.success) {
         setTests(response?.data);
       }
@@ -31,10 +36,35 @@ export default function TestView() {
   return (
     <Container maxWidth="false" sx={{ bgcolor: "#008037", height: "100vh" }}>
       <Container>
+        <Paper elevation={3} />
+        <Typography
+          textAlign="center"
+          variant="h4"
+          color="#F1B461"
+          sx={{ my: 2 }}
+        >
+          Scholarly
+        </Typography>
+        <Typography color="#F1B461" textAlign="center">
+          Create a new test by clicking the button below.
+        </Typography>
+        <Box textAlign="center">
+          <Button
+            size="large"
+            variant="contained"
+            color="success"
+            onClick={() => navigate("/testcreate")}
+            sx={{ my: 4, width: 200 }}
+          >
+            Create Test
+          </Button>
+        </Box>
         <Grid container spacing={2}>
-          <Grid item xs={4}>
-            {tests.map((test) => (
+          {tests.map((test, key) => (
+            <Grid item xs={4}>
               <List
+                key={key}
+                onClick={() => navigate("/showquestion/" + test.id)}
                 sx={{
                   width: "100%",
                   maxWidth: 360,
@@ -46,7 +76,13 @@ export default function TestView() {
               >
                 {" "}
                 <ListItem>
-                  <ListItemText primary="Subject" secondary={test.subject_id} />
+                  <ListItemText
+                    primary="Subject"
+                    secondary={
+                      subjects.find((item) => item.id == test.subject_id)
+                        ?.subject_name
+                    }
+                  />
                 </ListItem>
                 <Divider variant="inset" component="li" />
                 <ListItem>
@@ -63,33 +99,9 @@ export default function TestView() {
                   />
                 </ListItem>
               </List>
-            ))}
-          </Grid>
-          <Grid>
-            <Paper elevation={3} />
-            <Typography
-              textAlign="center"
-              variant="h4"
-              color="#F1B461"
-              sx={{ my: 2 }}
-            >
-              Scholarly
-            </Typography>
-            <Typography color="#F1B461">
-              Create a new test by clicking the button below.
-            </Typography>
-            <Box textAlign="center">
-              <Button
-                size="large"
-                variant="contained"
-                color="success"
-                onClick={() => navigate("/testcreate")}
-                sx={{ my: 4, width: 200 }}
-              >
-                Create Test
-              </Button>
-            </Box>
-          </Grid>
+            </Grid>
+          ))}
+          <Grid></Grid>
         </Grid>
       </Container>
     </Container>
