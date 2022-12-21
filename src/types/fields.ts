@@ -9,6 +9,7 @@ export type RegisterFields = {
   email: string;
   password: string;
   confirm_password: string;
+  user_type: "ADMIN" | "CREATOR";
 };
 
 export type TestFields = {

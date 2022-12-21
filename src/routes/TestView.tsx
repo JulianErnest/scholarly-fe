@@ -36,8 +36,17 @@ export default function TestView() {
   return (
     <Container maxWidth="false" sx={{ bgcolor: "#008037", height: "100vh" }}>
       <Container>
+        <Paper elevation={3} />
+        <Typography
+          textAlign="center"
+          variant="h4"
+          color="#F1B461"
+          sx={{ my: 2 }}
+        >
+          Scholarly
+        </Typography>
         <Grid container spacing={2}>
-          <Grid item xs={4}>
+          <Grid item xs={12}>
             {tests.map((test, key) => (
               <List
                 key={key}
@@ -79,15 +88,6 @@ export default function TestView() {
             ))}
           </Grid>
           <Grid>
-            <Paper elevation={3} />
-            <Typography
-              textAlign="center"
-              variant="h4"
-              color="#F1B461"
-              sx={{ my: 2 }}
-            >
-              Scholarly
-            </Typography>
             <Typography color="#F1B461">
               Create a new test by clicking the button below.
             </Typography>
