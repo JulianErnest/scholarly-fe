@@ -27,7 +27,12 @@ export default function HomeLayout() {
 
   useEffect(() => {
     if (user.id != 0) {
-      navigate("/testcreate");
+      if (user.user_type === 'MANAGER' || user.user_type === 'ADMIN') {
+        navigate("/admin");
+      } else {
+
+        navigate("/testview");
+      }
     }
   }, [user]);
 

@@ -1,9 +1,3 @@
-import {
-  LoginFields,
-  RegisterFields,
-  TestFields,
-  QuestionFields,
-} from "../types/fields";
 import api, { DefaultResponse } from "./api";
 
 async function getAllSubjects(token: string) {

@@ -1,4 +1,3 @@
-import { useOutlet } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
@@ -11,23 +10,24 @@ import { useContext, useEffect, useState } from "react";
 import authService from "../services/authService";
 import { UserContextType } from "../context/User";
 import { UserContext } from "../context/UserContext";
+import itemService from "../services/itemService";
+import { Item } from "../types/Item";
 const theme = createTheme();
 
-export default function Admin() {
-  const outlet = useOutlet();
+export default function Items() {
   const [keyword, setKeyword] = useState("");
-  const [users, setUsers] = useState([]);
+  const [items, setItems] = useState<Item[]>([]);
   const { token } = useContext(UserContext) as UserContextType;
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       console.log(keyword);
       // Send Axios request here
       if (keyword.length === 0) {
-        const response = await authService.getAllUsers(token);
-        setUsers(response.data);
+        const response = await itemService.getAllItems(token);
+        setItems(response.data);
       } else {
-        const response = await authService.searchUser(token, keyword);
-        setUsers(response.data);
+        // const response = await itemService.(token, keyword);
+        // setUsers(response.data);
       }
     }, 1000);
     return () => clearTimeout(delayDebounceFn);
@@ -35,9 +35,9 @@ export default function Admin() {
 
   useEffect(() => {
     (async () => {
-      const response = await authService.getAllUsers(token);
+      const response = await itemService.getAllItems(token);
       console.log(response);
-      setUsers(response.data);
+      setItems(response.data);
     })();
   }, []);
 
@@ -58,7 +58,7 @@ export default function Admin() {
           color="white"
           sx={{ my: 6, pt: 10 }}
         >
-          All Users
+          All Test Items
         </Typography>
         <TextField
           margin="normal"
@@ -67,7 +67,7 @@ export default function Admin() {
           InputLabelProps={{
             style: { color: "white" },
           }}
-          label="Search for a user"
+          label="Search for a test question"
           sx={{ input: { color: "white", backgroundColor: "green" } }}
           value={keyword}
           onChange={(t) => setKeyword(t.target.value)}
@@ -85,32 +85,32 @@ export default function Admin() {
               }}
             >
               <Grid item xs={2}>
-                <h5 style={styles.tableHeader}>First Name</h5>
+                <h5 style={styles.tableHeader}>Question</h5>
               </Grid>
               <Grid item xs={2}>
-                <h5 style={styles.tableHeader}>Last Name</h5>
+                <h5 style={styles.tableHeader}>Answer</h5>
               </Grid>
               <Grid item xs={4}>
-                <h5 style={styles.tableHeader}>Email</h5>
+                <h5 style={styles.tableHeader}>Created At</h5>
               </Grid>
               <Grid item xs={2}>
-                <h5 style={styles.tableHeader}>User Type</h5>
+                <h5 style={styles.tableHeader}>Test ID</h5>
               </Grid>
             </Grid>
             <List style={styles.list}>
-              {users.map((user: any, key) => (
+              {items.map((item, key) => (
                 <Grid key={key} container sx={{ height: "100%" }}>
                   <Grid item xs={2}>
-                    <h3 style={styles.tableHeader}>{user.first_name}</h3>
+                    <h3 style={styles.tableHeader}>{item.question}</h3>
                   </Grid>
                   <Grid item xs={2}>
-                    <h3 style={styles.tableHeader}>{user.last_name}</h3>
+                    <h3 style={styles.tableHeader}>{item.answer}</h3>
                   </Grid>
                   <Grid item xs={4}>
-                    <h3 style={styles.tableHeader}>{user.email}</h3>
+                    <h3 style={styles.tableHeader}>{item.created_at}</h3>
                   </Grid>
                   <Grid item xs={2}>
-                    <h3 style={styles.tableHeader}>{user.user_type}</h3>
+                    <h3 style={styles.tableHeader}>{item.test_id}</h3>
                   </Grid>
                 </Grid>
               ))}

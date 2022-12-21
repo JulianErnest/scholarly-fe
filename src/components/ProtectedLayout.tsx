@@ -39,13 +39,35 @@ export default function ProtectedLayout() {
           <div className={headstyles.logopic} onClick={homenig}>
             <img src={logo}></img>Scholarly
           </div>
-          <p
-            onClick={() => handleClick("testview")}
-            style={{ marginRight: 20 }}
-          >
-            View Tests
-          </p>
-          <p onClick={() => handleClick("testcreate")}>Create Test</p>
+          {user.user_type === "CREATOR" ? (
+            <>
+              <p
+                onClick={() => handleClick("testview")}
+                style={{ marginRight: 20 }}
+              >
+                View Tests
+              </p>
+              <p onClick={() => handleClick("testcreate")}>Create Test</p>
+            </>
+          ) : (
+            <>
+              <p
+                onClick={() => handleClick("testview")}
+                style={{ marginRight: 20 }}
+              ></p>
+              <p onClick={() => handleClick("testcreate")}>Tests</p>
+              <p
+                onClick={() => handleClick("testview")}
+                style={{ marginRight: 20 }}
+              ></p>
+              <p onClick={() => handleClick("testcreate")}>Subjects</p>
+              <p
+                onClick={() => handleClick("testview")}
+                style={{ marginRight: 20 }}
+              ></p>
+              <p onClick={() => handleClick("items")}>Items</p>
+            </>
+          )}
           <div className={headstyles.headerright}></div>
         </div>
         {outlet}

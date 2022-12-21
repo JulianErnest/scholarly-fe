@@ -1,4 +1,3 @@
-import { useOutlet, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
@@ -47,7 +46,6 @@ export default function TestCreate() {
   return (
     <ThemeProvider theme={theme}>
       <Container
-        maxWidth="false"
         sx={{
           backgroundImage: `url(${ImageBG})`,
           backgroundRepeat: "no-repeat",
