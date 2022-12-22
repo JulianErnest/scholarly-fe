@@ -25,6 +25,10 @@
   color: #323232;
 }
 
+p{
+  display: 'flex';
+  margin-inline: 10px;
+}
 .nav{
   float: left;
   display: flex;
@@ -64,7 +68,6 @@ img {
   flex: auto;
   margin-left: 30px;
   margin-top: 5px;
-  width: 0;
 }
 
 .title {

@@ -45,7 +45,8 @@ export default function TestCreate() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container
+      <Container 
+      maxWidth="lg"
         sx={{
           backgroundImage: `url(${ImageBG})`,
           backgroundRepeat: "no-repeat",
@@ -58,17 +59,18 @@ export default function TestCreate() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          bgcolor: "#323232",
         }}
       >
         <Box
           style={{ background: "#f2f6fc" }}
           textAlign="center"
           sx={{
-            width: "50%",
-            height: "100%",
+            width: 'auto',
+            height: 'auto',
             boxShadow: 2,
             rowGap: 3,
-            my: 1,
+            my: 8,
             justifyContent: "center",
           }}
         >
@@ -76,7 +78,7 @@ export default function TestCreate() {
             textAlign="center"
             variant="h4"
             color="#F1B461"
-            sx={{ my: 4 }}
+            sx={{ my: 5 }}
           >
             Scholarly
           </Typography>

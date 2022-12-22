@@ -83,7 +83,7 @@ export default function ShowQuestion() {
     <Grid
       container
       spacing={0}
-      sx={{ height: "90vh", backgroundColor: "green" }}
+      sx={{ height: "90vh", backgroundColor: "#008037" }}
     >
       <Grid
         item
