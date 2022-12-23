@@ -34,18 +34,21 @@ export default function TestView() {
   }, []);
 
   return (
-    <Container maxWidth="false" sx={{ bgcolor: "#008037", height: "100vh" }}>
+    <Container maxWidth="false" sx={{ 
+      mx: 0, 
+      bgcolor: "#008037", 
+      height: "100vh" }}>
+        
       <Container>
-        <Paper elevation={3} />
         <Typography
           textAlign="center"
           variant="h4"
-          color="#F1B461"
+          color="gold"
           sx={{ my: 2 }}
         >
           Scholarly
         </Typography>
-        <Typography color="#F1B461" textAlign="center">
+        <Typography color="gold" textAlign="center">
           Create a new test by clicking the button below.
         </Typography>
         <Box textAlign="center">

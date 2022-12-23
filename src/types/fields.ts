@@ -28,3 +28,8 @@ export type QuestionFields = {
   choice_d: string;
   test_id: number;
 };
+
+export type Subject = {
+  subject_name: string;
+};
+

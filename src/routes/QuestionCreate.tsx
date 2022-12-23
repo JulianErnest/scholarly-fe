@@ -51,7 +51,7 @@ export default function QuestionCreate() {
   return (
     <ThemeProvider theme={theme}>
       <Container
-        maxWidth="false"
+        maxWidth="lg"
         sx={{
           backgroundImage: `url(${ImageBG})`,
           backgroundRepeat: "no-repeat",
@@ -64,17 +64,18 @@ export default function QuestionCreate() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          my: 3,
         }}
       >
         <Box
           style={{ background: "#f2f6fc" }}
           textAlign="center"
           sx={{
-            width: "50%",
-            height: "100%",
+            width: 'auto',
+            height: 'auto',
             boxShadow: 2,
             rowGap: 3,
-            my: 1,
+            my: 8,
             justifyContent: "center",
           }}
         >
@@ -82,7 +83,7 @@ export default function QuestionCreate() {
             textAlign="center"
             variant="h4"
             color="#F1B461"
-            sx={{ my: 4 }}
+            sx={{ my: 5 }}
           >
             Scholarly
           </Typography>

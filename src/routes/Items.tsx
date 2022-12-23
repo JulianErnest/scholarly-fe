@@ -56,7 +56,7 @@ export default function Items() {
           textAlign="center"
           variant="h4"
           color="white"
-          sx={{ my: 6, pt: 10 }}
+          sx={{ my: 2 , pt: 2 }}
         >
           All Test Items
         </Typography>

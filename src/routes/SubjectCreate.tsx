@@ -11,16 +11,12 @@ import subjectService from "../services/subjectService";
 import { UserContext } from "../context/UserContext";
 import { UserContextType } from "../context/User";
 import { Subject } from "../types/Subject";
-import testService from "../services/testService";
 import toastService from "../services/toastService";
 const theme = createTheme();
 
-export default function TestCreate() {
+export default function SubjectCreate() {
   const [subjects, setSubjects] = useState<Subject[]>([]);
-  const [timeLimit, setTimeLimit] = useState("");
-  const [testDescription, setTestDescription] = useState("");
-  const [testName, setTestName] = useState("");
-  const [subject, handleSubject] = useState("");
+  const [subject_name, setSubject] = useState("");
   const { token, user } = useContext(UserContext) as UserContextType;
   useEffect(() => {
     (async () => {
@@ -30,17 +26,17 @@ export default function TestCreate() {
   }, []);
 
   async function handleCreate() {
-    const response = await testService.createTest(
+    const response = await subjectService.createSubject(
       {
-        test_description: testDescription,
-        test_name: testName,
-        subject_id: subject,
-        time_limit: timeLimit,
+        subject_name,
       },
-      user.id,
-      token
+      token,
     );
     toastService.showToast(response);
+    console.log(response)
+    if(response.success) {
+    setSubject("");
+    }
   }
 
   return (
@@ -83,60 +79,24 @@ export default function TestCreate() {
             Scholarly
           </Typography>
           <Typography color="#F1B461">
-            Create a test by filling up the following information below.
+            Create subject by filling up the following information below.
           </Typography>
           <Grid
             container
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           >
-            <Grid item xs={6} sx={{ my: 4, width: 200 }}>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={subject}
-                label="Age"
-                sx={{ width: 200 }}
-                onChange={(e) => handleSubject(e.target.value)}
-              >
-                {subjects.map((item, key) => (
-                  <MenuItem value={item.id} key={key}>
-                    {item.subject_name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </Grid>
-            <Grid item xs={6} sx={{ my: 4, width: 200 }}>
+            <Grid item xs={10} sx={{ my: 4, width: 200 }}>
               <TextField
-                value={timeLimit}
-                onChange={(e) => setTimeLimit(e.target.value)}
+                value={subject_name}
+                onChange={(e) => setSubject(e.target.value)}
                 required
-                id="time-limit"
-                label="Time Limit"
+                id="subject_name"
+                label="Subject Name"
                 variant="standard"
               />
             </Grid>
-            <Grid item xs={6} sx={{ my: 4, width: 200 }}>
-              <TextField
-                value={testName}
-                onChange={(e) => setTestName(e.target.value)}
-                required
-                id="test-name"
-                label="Test Name"
-                variant="standard"
-              />
             </Grid>
-            <Grid item xs={6} sx={{ my: 4, width: 200 }}>
-              <TextField
-                value={testDescription}
-                onChange={(e) => setTestDescription(e.target.value)}
-                required
-                id="test-description"
-                label="Test Description"
-                variant="standard"
-              />
-            </Grid>
-          </Grid>
           <Button
             size="large"
             variant="contained"
@@ -144,7 +104,7 @@ export default function TestCreate() {
             onClick={handleCreate}
             sx={{ my: 4, width: 200 }}
           >
-            Create Test
+            Create Subject
           </Button>
         </Box>
       </Container>
