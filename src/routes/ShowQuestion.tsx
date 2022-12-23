@@ -13,6 +13,8 @@ import { Item } from "../types/Item";
 import toastService from "../services/toastService";
 import { Subject } from "../types/Subject";
 import subjectService from "../services/subjectService";
+import { Direction } from "react-toastify/dist/utils";
+import { Rowing } from "@mui/icons-material";
 
 export default function ShowQuestion() {
   const [test, setTest] = useState<Test | null>(null);
@@ -97,8 +99,18 @@ export default function ShowQuestion() {
         </Typography>
         {questions.map((item, key) => (
           <Box key={key} width="90%" height={150}>
-            <Typography>{item.question}</Typography>
-            <Typography>{item.answer}</Typography>
+            <Typography>Question: {item.question}</Typography>
+            <Typography>Answer: {item.answer}</Typography>
+            <Box sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              }}>
+
+              <Typography>A.{item.choice_a}</Typography>
+              <Typography marginLeft={2}>B.{item.choice_b}</Typography>
+              <Typography marginLeft={2}>C.{item.choice_c}</Typography>
+              <Typography marginLeft={2}>D.{item.choice_d}</Typography>
+            </Box>
             <Button
               onClick={() => handleDelete(item)}
               style={{ backgroundColor: "red", color: "white" }}
