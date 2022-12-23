@@ -15,6 +15,7 @@ import Admin from "./Admin";
 import Items from "./Items";
 import Tests from "./Tests";
 import SubjectCreate from "./SubjectCreate";
+import SubjectsAdmin from "./SubjectsAdmin";
 
 export default function App() {
   return (
@@ -35,6 +36,8 @@ export default function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/tests" element={<Tests />} />
           <Route path="/items" element={<Items />} />
+          <Route path="/subjects" element={<Items />} />
+          <Route path="/subjectsadmin" element={<SubjectsAdmin />} />
           <Route path="/subjectcreate" element={<SubjectCreate />} />
         </Route>
       </Routes>

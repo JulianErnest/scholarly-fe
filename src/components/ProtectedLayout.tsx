@@ -60,7 +60,12 @@ export default function ProtectedLayout() {
                 onClick={() => handleClick("testview")}
                 style={{ marginRight: 20 }}
               ></p>
-              <p onClick={() => handleClick("subjectcreate")}>Subjects</p>
+              <p onClick={() => handleClick("subjectcreate")}>
+                Create a Subject
+              </p>
+              <p onClick={() => handleClick("subjectsadmin")}>
+                View All Subjects
+              </p>
               <p
                 onClick={() => handleClick("testview")}
                 style={{ marginRight: 20 }}
