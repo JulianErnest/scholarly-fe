@@ -1,6 +1,4 @@
-import {
-  Subject,
-} from "../types/Subject";
+import { Subject } from "../types/Subject";
 
 import api, { DefaultResponse } from "./api";
 
@@ -34,7 +32,22 @@ async function createSubject(fields: Subject, token: string) {
   }
 }
 
+async function searchSubject(token: string, keyword: string) {
+  try {
+    const response = await api.get("searchSubject/" + keyword, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    console.log(response);
+    return response.data;
+  } catch (error: any) {
+    return error.response.data;
+  }
+}
+
 export default {
   getAllSubjects,
   createSubject,
+  searchSubject,
 };

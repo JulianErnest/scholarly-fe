@@ -24,6 +24,9 @@ export default function SubjectsAdmin() {
       if (keyword.length === 0) {
         const response = await subjectService.getAllSubjects(token);
         setSubjects(response.data);
+      } else {
+        const response = await subjectService.searchSubject(token, keyword);
+        setSubjects(response.data);
       }
     }, 1000);
     return () => clearTimeout(delayDebounceFn);
@@ -63,7 +66,7 @@ export default function SubjectsAdmin() {
           InputLabelProps={{
             style: { color: "white" },
           }}
-          label="Search for a test question"
+          label="Search for a subject"
           sx={{ input: { color: "white", backgroundColor: "green" } }}
           value={keyword}
           onChange={(t) => setKeyword(t.target.value)}
