@@ -60,6 +60,19 @@ export default function Tests() {
         >
           All Test Items
         </Typography>
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          InputLabelProps={{
+            style: { color: "white" },
+          }}
+          label="Search for a test"
+          sx={{ input: { color: "white", backgroundColor: "green" } }}
+          value={keyword}
+          onChange={(t) => setKeyword(t.target.value)}
+          autoFocus
+        />
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Grid
