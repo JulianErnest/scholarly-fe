@@ -55,7 +55,7 @@ export default function ProtectedLayout() {
                 onClick={() => handleClick("testview")}
                 style={{ marginRight: 20 }}
               ></p>
-              <p onClick={() => handleClick("testcreate")}>Tests</p>
+              <p onClick={() => handleClick("tests")}>Tests</p>
               <p
                 onClick={() => handleClick("testview")}
                 style={{ marginRight: 20 }}

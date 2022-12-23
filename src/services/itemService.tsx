@@ -57,9 +57,24 @@ async function getAllItems(token: string) {
   }
 }
 
+async function searchItem(token: string, keyword: string) {
+  try {
+    const response = await api.get("searchItem/" + keyword, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    console.log(response);
+    return response.data;
+  } catch (error: any) {
+    return error.response.data;
+  }
+}
+
 export default {
   createItem,
   getTestItems,
   deleteItem,
-  getAllItems
+  getAllItems,
+  searchItem,
 };

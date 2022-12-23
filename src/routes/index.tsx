@@ -13,6 +13,7 @@ import QuestionCreate from "./QuestionCreate";
 import TestView from "./TestView";
 import Admin from "./Admin";
 import Items from "./Items";
+import Tests from "./Tests";
 
 export default function App() {
   return (
@@ -31,7 +32,7 @@ export default function App() {
           <Route path="/testcreate" element={<TestCreate />} />
           <Route path="/questioncreate/:id" element={<QuestionCreate />} />
           <Route path="/admin" element={<Admin />} />
-          <Route path="/tests" element={<QuestionCreate />} />
+          <Route path="/tests" element={<Tests />} />
           <Route path="/items" element={<Items />} />
           <Route path="/subjects" element={<QuestionCreate />} />
         </Route>

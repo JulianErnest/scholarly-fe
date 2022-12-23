@@ -79,10 +79,25 @@ async function getTestsById(token: string, id: number) {
   }
 }
 
+async function searchTest(token: string, keyword: string) {
+  try {
+    const response = await api.get("searchTest/" + keyword, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    console.log(response);
+    return response.data;
+  } catch (error: any) {
+    return error.response.data;
+  }
+}
+
 export default {
   createTest,
   updateTest,
   getTests,
   getTestsUser,
-  getTestsById
+  getTestsById,
+  searchTest,
 };

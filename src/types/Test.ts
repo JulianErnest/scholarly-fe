@@ -8,4 +8,7 @@ export type Test = {
   created_at: string;
   updated_at: string;
   deleted_at: string;
+  first_name: string;
+  last_name: string;
+  subject_name: string;
 };

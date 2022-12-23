@@ -26,8 +26,8 @@ export default function Items() {
         const response = await itemService.getAllItems(token);
         setItems(response.data);
       } else {
-        // const response = await itemService.(token, keyword);
-        // setUsers(response.data);
+        const response = await itemService.searchItem(token, keyword);
+        setItems(response.data);
       }
     }, 1000);
     return () => clearTimeout(delayDebounceFn);
